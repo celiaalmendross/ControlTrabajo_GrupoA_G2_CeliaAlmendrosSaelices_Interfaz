@@ -37,6 +37,7 @@ public class MainFrame extends JFrame{
     private JRadioButton hub3;
     private JTextArea print2;
     private JTextArea print3;
+    private JButton buscaPrioridadButton;
 
 
     public MainFrame ()
@@ -215,10 +216,43 @@ public class MainFrame extends JFrame{
             }
         });
 
+        buscaPrioridadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textohub.setVisible(false);
+                hub1.setVisible(false);
+                hub2.setVisible(false);
+                hub3.setVisible(false);
+                campoID.setVisible(false);
+                textoid.setVisible(false);
+                textoprioridad.setVisible(true);
+                botonPrioridad1.setVisible(true);
+                botonPrioridad2.setVisible(true);
+                botonPrioridad3.setVisible(true);
+                campoPeso.setVisible(false);
+                textopeso.setVisible(false);
+                campoErecibe.setVisible(false);
+                textoempresarec.setVisible(false);
+                campoEenvia.setVisible(false);
+                textoempresaenv.setVisible(false);
+                campoPais.setVisible(false);
+                textopais.setVisible(false);
+                campoDesc.setVisible(false);
+                textodescripicion.setVisible(false);
+                checkaduanas.setVisible(false);
+                campocolumna.setVisible(false);
+                textocolumna.setVisible(false);
+                botonok.setVisible(true);
+                printder.setText("");
+                confirmar_boton[0]=5;
+            }
+        });
+
         botonok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int indice=0;
+                int prioridad=0;
                 if(hub1.isSelected())
                 {
                     indice =0;
@@ -230,27 +264,25 @@ public class MainFrame extends JFrame{
                 if(hub3.isSelected()) {
                     indice = 2;
                 }
+                if (botonPrioridad1.isSelected()){
+                    prioridad = 1;
+                }
+                if (botonPrioridad2.isSelected()){
+                    prioridad = 2;
+                }
+                if (botonPrioridad3.isSelected()){
+                    prioridad = 3;
+                }
                 switch (confirmar_boton[0]){
                     case 1:
                         int id= Integer.parseInt(campoID.getText());
                         int peso = Integer.parseInt(campoPeso.getText());
                         String pais = campoPais.getText();
-                        int prioridad = 0;
+
                         String desc = campoDesc.getText();
                         String emp_envia = campoEenvia.getText();
                         String emp_recibe = campoErecibe.getText();
                         boolean aduanas = checkaduanas.isSelected();
-
-
-                        if (botonPrioridad1.isSelected()){
-                            prioridad = 1;
-                        }
-                        if (botonPrioridad2.isSelected()){
-                            prioridad = 2;
-                        }
-                        if (botonPrioridad3.isSelected()){
-                            prioridad = 3;
-                        }
 
                         Contenedor contenedor = new Contenedor(id, peso, pais, aduanas,prioridad, desc, emp_envia, emp_recibe );
                         puerto.apila(contenedor,indice);
@@ -271,11 +303,14 @@ public class MainFrame extends JFrame{
                         int id1 = Integer.parseInt(campoID.getText());
                         printder.setText(puerto.MostrarDatos(id1,indice));
                         break;
-                    case 4:
 
+                    case 4:
                         String pais2 = campoPais.getText();
                         printder.setText(String.valueOf(puerto.contenedoresPais(pais2)));
                         break;
+
+                    case 5:
+                        printder.setText(puerto.buscaPrioridad(prioridad));
                 }
             }
         });
@@ -339,6 +374,7 @@ public class MainFrame extends JFrame{
                 }
             }
         });
+
     }
 
     public static void main(String[] args) {
