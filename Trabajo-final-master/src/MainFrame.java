@@ -216,9 +216,9 @@ public class MainFrame extends JFrame{
             }
         });
 
-        buscaPrioridadButton.addActionListener(new ActionListener() {
+        buscaPrioridadButton.addActionListener(new ActionListener() { //Nuevo boton para buscar prioridad
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) { //Hacemos visibles los campos que necesitamos
                 textohub.setVisible(false);
                 hub1.setVisible(false);
                 hub2.setVisible(false);
@@ -244,7 +244,7 @@ public class MainFrame extends JFrame{
                 textocolumna.setVisible(false);
                 botonok.setVisible(true);
                 printder.setText("");
-                confirmar_boton[0]=5;
+                confirmar_boton[0]=5; //Para que te lleve al caso 5 a la hora de confirmar
             }
         });
 
@@ -310,7 +310,7 @@ public class MainFrame extends JFrame{
                         break;
 
                     case 5:
-                        printder.setText(puerto.buscaPrioridad(prioridad));
+                        printder.setText(puerto.buscaPrioridad(prioridad)); //Escribimos en el mapa del puerto la información sobre las prioridades
                 }
             }
         });
